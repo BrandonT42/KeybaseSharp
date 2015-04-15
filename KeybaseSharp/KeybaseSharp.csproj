@@ -7,8 +7,8 @@
     <ProjectGuid>{E218344B-59B1-456E-ACF4-A09DC5D2A93E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KeybaseSharp</RootNamespace>
-    <AssemblyName>KeybaseSharp</AssemblyName>
+    <RootNamespace>KenBonny.KeybaseSharp</RootNamespace>
+    <AssemblyName>KenBonny.KeybaseSharp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

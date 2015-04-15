@@ -1,6 +1,6 @@
 ﻿namespace KenBonny.KeybaseSharp
 {
-    public class Class1
+    public abstract class BaseObject
     {
     }
 }

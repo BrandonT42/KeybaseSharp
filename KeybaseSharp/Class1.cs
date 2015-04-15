@@ -1,4 +1,4 @@
-﻿namespace KeybaseSharp
+﻿namespace KenBonny.KeybaseSharp
 {
     public class Class1
     {

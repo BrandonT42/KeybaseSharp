@@ -45,7 +45,7 @@
     <Compile Include="Model\Basics.cs" />
     <Compile Include="Model\BillingAndQuotas.cs" />
     <Compile Include="Model\ByPresentationGroup.cs" />
-    <Compile Include="Model\ByProofType.cs" />
+    <Compile Include="Model\SortedProof.cs" />
     <Compile Include="Model\CryptocurrencyAddresses.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -56,7 +56,7 @@
     <Compile Include="Model\Image.cs" />
     <Compile Include="Model\InvitationStats.cs" />
     <Compile Include="Model\Key.cs" />
-    <Compile Include="Model\Last.cs" />
+    <Compile Include="Model\Signature.cs" />
     <Compile Include="Model\UserLookup.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -66,10 +66,10 @@
     <Compile Include="Model\PrivateKeys.cs" />
     <Compile Include="Model\Profile.cs" />
     <Compile Include="Model\Proof.cs" />
-    <Compile Include="Model\ProofsSummary.cs" />
+    <Compile Include="Model\ProofSummary.cs" />
     <Compile Include="Model\PublicKeys.cs" />
     <Compile Include="Model\Sibkeys.cs" />
-    <Compile Include="Model\Sigs.cs" />
+    <Compile Include="Model\Signatures.cs" />
     <Compile Include="Model\Subkeys.cs" />
     <Compile Include="Model\KeybaseUser.cs" />
     <Compile Include="Model\Usage.cs" />

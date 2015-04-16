@@ -24,8 +24,8 @@ namespace KenBonny.KeybaseSharp.Model
         [JsonProperty(PropertyName = "private_keys")]
         public PrivateKeys PrivateKeys { get; set; }
         
-        [JsonProperty(PropertyName = "proof_summary")]
-        public ProofsSummary ProofsSummary { get; set; }
+        [JsonProperty(PropertyName = "proofs_summary")]
+        public ProofSummary ProofSummary { get; set; }
 
         //[JsonProperty(PropertyName = "cryptocurrency_addresses")]
         //public CryptocurrencyAddresses CryptocurrencyAddresses { get; set; }
@@ -33,7 +33,7 @@ namespace KenBonny.KeybaseSharp.Model
         public Pictures Pictures { get; set; }
         
         [JsonProperty(PropertyName = "sigs")]
-        public Sigs Signatures { get; set; }
+        public Signatures Signatures { get; set; }
         //public Devices Devices { get; set; }
     }
 }

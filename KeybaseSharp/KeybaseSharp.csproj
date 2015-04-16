@@ -40,7 +40,9 @@
     <Compile Include="Model\BillingAndQuotas.cs" />
     <Compile Include="Model\ByPresentationGroup.cs" />
     <Compile Include="Model\ByProofType.cs" />
-    <Compile Include="Model\CryptocurrencyAddresses.cs" />
+    <Compile Include="Model\CryptocurrencyAddresses.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Model\Ctime.cs" />
     <Compile Include="Model\Devices.cs" />
     <Compile Include="Model\Emails.cs" />

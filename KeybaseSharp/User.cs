@@ -26,10 +26,9 @@ namespace KenBonny.KeybaseSharp
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                userLookupResponse =
-                    await
-                        client.GetAsync(string.Format("{0}?{1}={2}", SpecificAddress, GetProofTypeDescription(proofType),
-                            string.Join(",", usernames)));
+                var address = string.Format("{0}?{1}={2}", SpecificAddress, GetProofTypeDescription(proofType),
+                    string.Join(",", usernames));
+                userLookupResponse = await client.GetAsync(address);
             }
             userLookupResponse.EnsureSuccessStatusCode();
 

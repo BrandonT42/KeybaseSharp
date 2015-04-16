@@ -11,10 +11,9 @@ namespace KenBonny.KeybaseSharp.Model
 
         public string Bundle { get; set; }
         
-        // todo ctime
-        public long Mtime { get; set; }
+        public Ctime Mtime { get; set; }
         
-        public long Ctime { get; set; }
+        public Ctime Ctime { get; set; }
         
         public string Ukbid { get; set; }
 

@@ -14,5 +14,10 @@ namespace KenBonny.KeybaseSharp.Model
             DateTime = new DateTime(1970, 1, 1).Add(span);
             DateTimeLocal = TimeZone.CurrentTimeZone.ToLocalTime(DateTime);
         }
+
+        public static implicit operator Ctime(long ctime)
+        {
+            return new Ctime(ctime);
+        }
     }
 }

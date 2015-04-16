@@ -56,6 +56,7 @@
     <Compile Include="Model\InvitationStats.cs" />
     <Compile Include="Model\Key.cs" />
     <Compile Include="Model\Signature.cs" />
+    <Compile Include="Model\UserAutocomplete.cs" />
     <Compile Include="Model\UserLookup.cs">
       <SubType>Code</SubType>
     </Compile>

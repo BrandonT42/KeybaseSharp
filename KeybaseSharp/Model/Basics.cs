@@ -4,14 +4,13 @@ namespace KenBonny.KeybaseSharp.Model
 {
     public class Basics
     {
-        // todo ctime
         public string Username { get; set; }
 
-        public long Ctime { get; set; }
+        public Ctime Ctime { get; set; }
         
-        public long Mtime { get; set; }
+        public Ctime Mtime { get; set; }
+
         [JsonProperty(PropertyName = "id_version")]
-        
         public int IdVersion { get; set; }
 
         [JsonProperty(PropertyName = "track_version")]

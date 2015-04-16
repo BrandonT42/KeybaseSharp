@@ -4,6 +4,7 @@ namespace KenBonny.KeybaseSharp.Model
     {
         // todo implement all
         public Key Primary { get; set; }
+
         //public All All { get; set; }
     }
 }

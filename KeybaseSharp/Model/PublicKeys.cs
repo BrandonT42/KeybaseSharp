@@ -2,7 +2,7 @@ namespace KenBonny.KeybaseSharp.Model
 {
     public class PublicKeys
     {
-        // todo specifi items when they make the json sound
+        // todo add keys when they have valid json
         public Key Primary { get; set; }
         //public Subkeys Subkeys { get; set; }
         //public Sibkeys Sibkeys { get; set; }

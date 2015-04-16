@@ -5,7 +5,6 @@
     /// </summary>
     public enum ProofType
     {
-        Username,
         Twitter,
         Github,
         Reddit,

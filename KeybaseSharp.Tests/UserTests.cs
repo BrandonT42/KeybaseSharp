@@ -6,10 +6,10 @@ namespace KenBonny.KeybaseSharp.Tests
     public class UserTests
     {
         [TestMethod]
-        public async void LookupTestKnownUser()
+        public void LookupTestKnownUser()
         {
             var user = new User();
-            var userLookup = await user.LookupAsync("kenbonny", ProofType.Usernames);
+            var userLookup = user.LookupAsync("kenbonny", ProofType.Usernames).Result;
 
             Assert.IsNotNull(userLookup);
             Assert.AreEqual(0, userLookup.Status.Code);
@@ -17,10 +17,10 @@ namespace KenBonny.KeybaseSharp.Tests
         }
 
         [TestMethod]
-        public async void LookupTestUnknownUser()
+        public void LookupTestUnknownUser()
         {
             var user = new User();
-            var userLookup = await user.LookupAsync("bla", ProofType.Usernames);
+            var userLookup = user.LookupAsync("bla", ProofType.Usernames).Result;
 
             Assert.IsNotNull(userLookup);
             Assert.AreEqual(205, userLookup.Status.Code);

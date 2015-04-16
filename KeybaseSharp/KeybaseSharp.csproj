@@ -40,39 +40,44 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\All.cs" />
+    <Compile Include="Model\User\Autocomplete\Completion.cs" />
+    <Compile Include="Model\User\Autocomplete\Components.cs" />
+    <Compile Include="Model\User\Autocomplete\KeyFingerprint.cs" />
+    <Compile Include="Model\User\Autocomplete\UserProof.cs" />
+    <Compile Include="Model\User\Autocomplete\Website.cs" />
+    <Compile Include="Model\User\Lookup\All.cs" />
     <Compile Include="Model\BaseObject.cs" />
-    <Compile Include="Model\Basics.cs" />
-    <Compile Include="Model\BillingAndQuotas.cs" />
-    <Compile Include="Model\SortedProof.cs" />
-    <Compile Include="Model\CryptocurrencyAddresses.cs">
+    <Compile Include="Model\User\Lookup\Basics.cs" />
+    <Compile Include="Model\User\Lookup\BillingAndQuotas.cs" />
+    <Compile Include="Model\User\Lookup\SortedProof.cs" />
+    <Compile Include="Model\User\Lookup\CryptocurrencyAddresses.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Ctime.cs" />
-    <Compile Include="Model\Devices.cs" />
-    <Compile Include="Model\Emails.cs" />
-    <Compile Include="Model\Families.cs" />
-    <Compile Include="Model\Image.cs" />
-    <Compile Include="Model\InvitationStats.cs" />
-    <Compile Include="Model\Key.cs" />
-    <Compile Include="Model\Signature.cs" />
-    <Compile Include="Model\UserAutocomplete.cs" />
-    <Compile Include="Model\UserLookup.cs">
+    <Compile Include="Model\User\Lookup\Ctime.cs" />
+    <Compile Include="Model\User\Lookup\Devices.cs" />
+    <Compile Include="Model\User\Lookup\Emails.cs" />
+    <Compile Include="Model\User\Lookup\Families.cs" />
+    <Compile Include="Model\User\Lookup\Image.cs" />
+    <Compile Include="Model\User\Lookup\InvitationStats.cs" />
+    <Compile Include="Model\User\Lookup\Key.cs" />
+    <Compile Include="Model\User\Lookup\Signature.cs" />
+    <Compile Include="Model\User\Autocomplete\UserAutocomplete.cs" />
+    <Compile Include="Model\User\Lookup\UserLookup.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Pictures.cs" />
-    <Compile Include="Model\Plan.cs" />
-    <Compile Include="Model\Email.cs" />
-    <Compile Include="Model\PrivateKeys.cs" />
-    <Compile Include="Model\Profile.cs" />
-    <Compile Include="Model\Proof.cs" />
-    <Compile Include="Model\ProofSummary.cs" />
-    <Compile Include="Model\PublicKeys.cs" />
-    <Compile Include="Model\Sibkeys.cs" />
-    <Compile Include="Model\Signatures.cs" />
-    <Compile Include="Model\Subkeys.cs" />
-    <Compile Include="Model\KeybaseUser.cs" />
-    <Compile Include="Model\Usage.cs" />
+    <Compile Include="Model\User\Lookup\Pictures.cs" />
+    <Compile Include="Model\User\Lookup\Plan.cs" />
+    <Compile Include="Model\User\Lookup\Email.cs" />
+    <Compile Include="Model\User\Lookup\PrivateKeys.cs" />
+    <Compile Include="Model\User\Lookup\Profile.cs" />
+    <Compile Include="Model\User\Lookup\Proof.cs" />
+    <Compile Include="Model\User\Lookup\ProofSummary.cs" />
+    <Compile Include="Model\User\Lookup\PublicKeys.cs" />
+    <Compile Include="Model\User\Lookup\Sibkeys.cs" />
+    <Compile Include="Model\User\Lookup\Signatures.cs" />
+    <Compile Include="Model\User\Lookup\Subkeys.cs" />
+    <Compile Include="Model\User\Lookup\KeybaseUser.cs" />
+    <Compile Include="Model\User\Lookup\Usage.cs" />
     <Compile Include="ProofType.cs" />
     <Compile Include="User.cs">
       <SubType>Code</SubType>
@@ -80,7 +85,7 @@
     <Compile Include="KeybaseApi.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Status.cs" />
+    <Compile Include="Model\User\Lookup\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

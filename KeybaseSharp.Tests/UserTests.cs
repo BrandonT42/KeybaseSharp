@@ -6,27 +6,49 @@ namespace KenBonny.KeybaseSharp.Tests
     [TestClass]
     public class UserTests
     {
+        public User User { get; set; }
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            User = new User();
+        }
+
         [TestMethod]
         public void LookupTestKnownUser()
         {
-            var user = new User();
-            var userLookup = user.LookupAsync("kenbonny", ProofType.Usernames).Result;
+            var lookupTask = User.LookupAsync("kenbonny", ProofType.Usernames);
+            Assert.IsNotNull(lookupTask);
 
-            Assert.IsNotNull(userLookup);
-            Assert.AreEqual(0, userLookup.Status.Code);
-            Assert.AreEqual("Ken Bonny", userLookup.Them.First().Profile.FullName);
+            var lookup = lookupTask.Result;
+            Assert.AreEqual(0, lookup.Status.Code);
+            Assert.AreEqual("Ken Bonny", lookup.Them.First().Profile.FullName);
         }
 
         [TestMethod]
         public void LookupTestUnknownUser()
         {
-            var user = new User();
-            var userLookup = user.LookupAsync("bla", ProofType.Usernames).Result;
+            var lookup = User.LookupAsync("bla", ProofType.Usernames).Result;
 
-            Assert.IsNotNull(userLookup);
-            Assert.AreEqual(0, userLookup.Status.Code);
-            Assert.IsTrue(userLookup.Them.All(u => u == null));
-            Assert.IsFalse(string.IsNullOrEmpty(userLookup.CsrfToken));
+            Assert.IsNotNull(lookup);
+            Assert.AreEqual(0, lookup.Status.Code);
+            Assert.IsTrue(lookup.Them.All(u => u == null));
+            Assert.IsFalse(string.IsNullOrEmpty(lookup.CsrfToken));
+        }
+
+        [TestMethod]
+        public void AutocompleteTest()
+        {
+            const string partial = "kenbo";
+
+            var autocompleteTask = User.AutocompleteAsync(partial);
+            Assert.IsNotNull(autocompleteTask);
+
+            var autocomplete = autocompleteTask.Result;
+            Assert.IsTrue(
+                autocomplete.Completions.All(
+                    c => c.Components.Username.Value.Contains(partial) 
+                        || partial.Contains(c.Components.Username.Value)));
         }
     }
 }

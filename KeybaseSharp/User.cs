@@ -11,6 +11,11 @@ namespace KenBonny.KeybaseSharp
     {
         private static readonly string SpecificAddress = string.Format("_/api/{0}/user/lookup.json", KeybaseApi.Version);
 
+        public Task<UserLookup> LookupAsync(string username, ProofType proofType)
+        {
+            return LookupAsync(new[] {username}, proofType);
+        }
+
         public async Task<UserLookup> LookupAsync(IEnumerable<string> usernames, ProofType proofType)
         {
             HttpResponseMessage userLookupResponse;

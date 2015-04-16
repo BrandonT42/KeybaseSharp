@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using KenBonny.KeybaseSharp.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace KenBonny.KeybaseSharp.Tests
 {

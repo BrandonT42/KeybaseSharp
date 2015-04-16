@@ -1,6 +1,6 @@
 namespace KenBonny.KeybaseSharp.Model.User.Autocomplete
 {
-    public class UserProof
+    public class UserHandle
     {
         public string Val { get; set; }
 

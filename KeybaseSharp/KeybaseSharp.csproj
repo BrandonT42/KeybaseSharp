@@ -43,7 +43,7 @@
     <Compile Include="Model\User\Autocomplete\Completion.cs" />
     <Compile Include="Model\User\Autocomplete\Components.cs" />
     <Compile Include="Model\User\Autocomplete\KeyFingerprint.cs" />
-    <Compile Include="Model\User\Autocomplete\UserProof.cs" />
+    <Compile Include="Model\User\Autocomplete\UserHandle.cs" />
     <Compile Include="Model\User\Autocomplete\Website.cs" />
     <Compile Include="Model\User\Lookup\All.cs" />
     <Compile Include="Model\BaseObject.cs" />

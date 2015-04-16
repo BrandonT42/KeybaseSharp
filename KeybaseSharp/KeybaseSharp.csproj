@@ -34,14 +34,44 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseObject.cs" />
-    <Compile Include="Keybase.cs">
+    <Compile Include="Model\All.cs" />
+    <Compile Include="Model\BaseObject.cs" />
+    <Compile Include="Model\Basics.cs" />
+    <Compile Include="Model\BillingAndQuotas.cs" />
+    <Compile Include="Model\ByPresentationGroup.cs" />
+    <Compile Include="Model\ByProofType.cs" />
+    <Compile Include="Model\CryptocurrencyAddresses.cs" />
+    <Compile Include="Model\Ctime.cs" />
+    <Compile Include="Model\Devices.cs" />
+    <Compile Include="Model\Emails.cs" />
+    <Compile Include="Model\Families.cs" />
+    <Compile Include="Model\Image.cs" />
+    <Compile Include="Model\InvitationStats.cs" />
+    <Compile Include="Model\Key.cs" />
+    <Compile Include="Model\Last.cs" />
+    <Compile Include="Model\LookupObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Pictures.cs" />
+    <Compile Include="Model\Plan.cs" />
+    <Compile Include="Model\Primary.cs" />
+    <Compile Include="Model\PrivateKeys.cs" />
+    <Compile Include="Model\Profile.cs" />
+    <Compile Include="Model\Proof.cs" />
+    <Compile Include="Model\ProofsSummary.cs" />
+    <Compile Include="Model\PublicKeys.cs" />
+    <Compile Include="Model\Sibkeys.cs" />
+    <Compile Include="Model\Sigs.cs" />
+    <Compile Include="Model\Subkeys.cs" />
+    <Compile Include="Model\Them.cs" />
+    <Compile Include="Model\Usage.cs" />
+    <Compile Include="User.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="KeybaseApi.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LookupObject.cs" />
+    <Compile Include="Model\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

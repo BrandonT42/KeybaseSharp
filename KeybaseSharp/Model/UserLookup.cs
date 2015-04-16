@@ -1,6 +1,6 @@
 namespace KenBonny.KeybaseSharp.Model
 {
-    public class LookupObject : BaseObject
+    public class UserLookup : BaseObject
     {
         public Them Them { get; set; }
     }

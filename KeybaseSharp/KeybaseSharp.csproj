@@ -30,8 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\All.cs" />
@@ -51,7 +57,7 @@
     <Compile Include="Model\InvitationStats.cs" />
     <Compile Include="Model\Key.cs" />
     <Compile Include="Model\Last.cs" />
-    <Compile Include="Model\LookupObject.cs">
+    <Compile Include="Model\UserLookup.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Pictures.cs" />
@@ -67,6 +73,7 @@
     <Compile Include="Model\Subkeys.cs" />
     <Compile Include="Model\Them.cs" />
     <Compile Include="Model\Usage.cs" />
+    <Compile Include="ProofType.cs" />
     <Compile Include="User.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -75,6 +82,9 @@
     </Compile>
     <Compile Include="Model\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

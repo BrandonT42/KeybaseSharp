@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using KenBonny.KeybaseSharp.Model;
+using KenBonny.KeybaseSharp.Model.User.Autocomplete;
 using KenBonny.KeybaseSharp.Model.User.Lookup;
 using Newtonsoft.Json;
 
@@ -10,7 +10,8 @@ namespace KenBonny.KeybaseSharp
 {
     public class User
     {
-        private static readonly string SpecificAddress = string.Format("_/api/{0}/user/lookup.json", KeybaseApi.Version);
+        private static readonly string AutocompleteAddress = string.Format("_/api/{0}/user/autocomplete.json?q=",
+            KeybaseApi.Version);
 
         /// <summary>
         /// Look a user up on Keybase.
@@ -34,23 +35,25 @@ namespace KenBonny.KeybaseSharp
         /// <returns>The details of the users on Keybase.</returns>
         public async Task<UserLookup> LookupAsync(IEnumerable<string> usernames, ProofType proofType)
         {
-            HttpResponseMessage userLookupResponse;
+            var address = string.Format("_/api/{0}/user/lookup.json?{1}={2}"
+                , KeybaseApi.Version
+                , GetProofTypeDescription(proofType)
+                , string.Join(",", usernames));
 
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = KeybaseApi.BaseLocation;
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            return await KeybaseApi.Get<UserLookup>(address);
+        }
 
-                var address = string.Format("{0}?{1}={2}", SpecificAddress, GetProofTypeDescription(proofType),
-                    string.Join(",", usernames));
-                userLookupResponse = await client.GetAsync(address);
-            }
-            userLookupResponse.EnsureSuccessStatusCode();
+        /// <summary>
+        /// Autocomplete will only return up to 10 matching results for a search string of your choice,
+        ///  although it will focus on the best matches in can find.
+        /// </summary>
+        /// <param name="searchTerm">Can match Keybase usernames, full names, identity usernames, and key fingerprints.</param>
+        /// <returns></returns>
+        public async Task<UserAutocomplete> AutocompleteAsync(string searchTerm)
+        {
+            var address = string.Format("_/api/{0}/user/autocomplete.json?q={1}", KeybaseApi.Version, searchTerm);
 
-            var userLookupJson = await userLookupResponse.Content.ReadAsStringAsync();
-            var userLookup = JsonConvert.DeserializeObject<UserLookup>(userLookupJson);
-            return userLookup;
+            return await KeybaseApi.Get<UserAutocomplete>(address);
         }
 
         private string GetProofTypeDescription(ProofType proofType)

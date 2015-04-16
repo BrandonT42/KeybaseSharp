@@ -14,8 +14,7 @@ namespace KenBonny.KeybaseSharp.Model
         public int PricePennies { get; set; }
 
         public int Gigabytes { get; set; }
-
-
+        
         [JsonProperty(PropertyName = "num_groups")]
         public int NumGroups { get; set; }
 

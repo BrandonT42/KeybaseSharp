@@ -24,8 +24,9 @@ namespace KenBonny.KeybaseSharp.Tests
             var userLookup = user.LookupAsync("bla", ProofType.Usernames).Result;
 
             Assert.IsNotNull(userLookup);
-            Assert.AreEqual(205, userLookup.Status.Code);
-            Assert.AreEqual("NOT_FOUND", userLookup.Status.Name);
+            Assert.AreEqual(0, userLookup.Status.Code);
+            Assert.IsTrue(userLookup.Them.All(u => u == null));
+            Assert.IsFalse(string.IsNullOrEmpty(userLookup.CsrfToken));
         }
     }
 }

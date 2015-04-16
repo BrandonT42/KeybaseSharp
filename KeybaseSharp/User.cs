@@ -11,11 +11,26 @@ namespace KenBonny.KeybaseSharp
     {
         private static readonly string SpecificAddress = string.Format("_/api/{0}/user/lookup.json", KeybaseApi.Version);
 
+        /// <summary>
+        /// Look a user up on Keybase.
+        /// </summary>
+        /// <param name="username">Specify the username you want to look for 
+        /// (can be a twitter handle, reddit login, etc.).</param>
+        /// <param name="proofType">The type of username provided.</param>
+        /// <returns>The details of a user on Keybase.</returns>
         public Task<UserLookup> LookupAsync(string username, ProofType proofType)
         {
             return LookupAsync(new[] {username}, proofType);
         }
 
+        /// <summary>
+        /// Look multilpe users up on Keybase.
+        /// </summary>
+        /// <param name="usernames">Specify the usernames you want to look for 
+        /// (can be a twitter handle, reddit login, etc.). Do not mix different types of usernames,
+        ///  all usernames or all twitter handles.</param>
+        /// <param name="proofType">The type of usernames provided.</param>
+        /// <returns>The details of the users on Keybase.</returns>
         public async Task<UserLookup> LookupAsync(IEnumerable<string> usernames, ProofType proofType)
         {
             HttpResponseMessage userLookupResponse;

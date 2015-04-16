@@ -2,6 +2,9 @@
 
 namespace KenBonny.KeybaseSharp
 {
+    /// <summary>
+    /// The constants of the application
+    /// </summary>
     internal static class KeybaseApi
     {
         internal static readonly string Version = "1.0";

@@ -7,7 +7,6 @@ namespace KenBonny.KeybaseSharp.Model
         // todo ctime
         public long Mtime { get; set; }
 
-
         [JsonProperty(PropertyName = "full_name")]
         public string FullName { get; set; }
         

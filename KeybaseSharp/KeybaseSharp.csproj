@@ -44,7 +44,6 @@
     <Compile Include="Model\BaseObject.cs" />
     <Compile Include="Model\Basics.cs" />
     <Compile Include="Model\BillingAndQuotas.cs" />
-    <Compile Include="Model\ByPresentationGroup.cs" />
     <Compile Include="Model\SortedProof.cs" />
     <Compile Include="Model\CryptocurrencyAddresses.cs">
       <SubType>Code</SubType>

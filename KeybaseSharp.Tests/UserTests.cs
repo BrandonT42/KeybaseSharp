@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace KenBonny.KeybaseSharp.Tests
 {
@@ -13,7 +14,7 @@ namespace KenBonny.KeybaseSharp.Tests
 
             Assert.IsNotNull(userLookup);
             Assert.AreEqual(0, userLookup.Status.Code);
-            Assert.AreEqual("Ken Bonny", userLookup.Them.Profile.FullName);
+            Assert.AreEqual("Ken Bonny", userLookup.Them.First().Profile.FullName);
         }
 
         [TestMethod]

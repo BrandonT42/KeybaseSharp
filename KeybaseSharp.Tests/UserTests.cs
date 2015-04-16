@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace KenBonny.KeybaseSharp.Tests
@@ -6,7 +9,12 @@ namespace KenBonny.KeybaseSharp.Tests
     [TestClass]
     public class UserTests
     {
-        public User User { get; set; }
+        private User User { get; set; }
+        private const string KnownUser = "kenbonny";
+        private const string KnwonTwitter = "bonny_ken";
+        private const string KnownUserFullName = "Ken Bonny";
+        private const string PartialUser = "kenbo";
+        private const string UnknownUser = "bla";
 
         [TestInitialize]
         public void Initialize()
@@ -17,56 +25,56 @@ namespace KenBonny.KeybaseSharp.Tests
         [TestMethod]
         public void Lookup_Test_Single_Known_User()
         {
-            var lookupTask = User.LookupAsync("kenbonny");
+            var lookupTask = User.LookupAsync(KnownUser);
             Assert.IsNotNull(lookupTask);
 
             var lookup = lookupTask.Result;
             Assert.AreEqual(0, lookup.Status.Code);
-            Assert.AreEqual("Ken Bonny", lookup.Them.Profile.FullName);
+            Assert.AreEqual(KnownUserFullName, lookup.Them.Profile.FullName);
         }
 
         [TestMethod]
         public void Lookup_Test_Single_Known_Identity()
         {
-            var lookupTask = User.LookupAsync("bonny_ken", ProofType.Twitter);
+            var lookupTask = User.LookupAsync(KnwonTwitter, ProofType.Twitter);
             Assert.IsNotNull(lookupTask);
 
             var lookup = lookupTask.Result;
             Assert.AreEqual(0, lookup.Status.Code);
             Assert.IsTrue(lookup.Them.Count() == 1);
-            Assert.AreEqual("Ken Bonny", lookup.Them.First().Profile.FullName);
+            Assert.AreEqual(KnownUserFullName, lookup.Them.First().Profile.FullName);
         }
 
         [TestMethod]
         public void Lookup_Test_Multiple_Known_Users()
         {
-            var lookupTask = User.LookupAsync(new[] {"kenbonny", "ken"});
+            var lookupTask = User.LookupAsync(new[] {KnownUser, "ken"});
             Assert.IsNotNull(lookupTask);
 
             var lookup = lookupTask.Result;
             Assert.AreEqual(0, lookup.Status.Code);
             Assert.IsTrue(lookup.Them.Count() == 2);
-            Assert.AreEqual("Ken Bonny", lookup.Them.First().Profile.FullName);
+            Assert.AreEqual(KnownUserFullName, lookup.Them.First().Profile.FullName);
             Assert.AreEqual("Ken Mather", lookup.Them.Last().Profile.FullName);
         }
 
         [TestMethod]
         public void Lookup_Test_Multiple_Known_Unknown_Users()
         {
-            var lookupTask = User.LookupAsync(new[] {"kenbonny", "bla"});
+            var lookupTask = User.LookupAsync(new[] {KnownUser, UnknownUser});
             Assert.IsNotNull(lookupTask);
 
             var lookup = lookupTask.Result;
             Assert.AreEqual(0, lookup.Status.Code);
             Assert.IsTrue(lookup.Them.Count() == 2);
-            Assert.AreEqual("Ken Bonny", lookup.Them.First().Profile.FullName);
+            Assert.AreEqual(KnownUserFullName, lookup.Them.First().Profile.FullName);
             Assert.IsNull(lookup.Them.Last());
         }
 
         [TestMethod]
         public void Lookup_Test_Single_Unknown_User()
         {
-            var lookup = User.LookupAsync("bla").Result;
+            var lookup = User.LookupAsync(UnknownUser).Result;
 
             Assert.IsNotNull(lookup);
             Assert.AreEqual(205, lookup.Status.Code);
@@ -78,7 +86,7 @@ namespace KenBonny.KeybaseSharp.Tests
         [TestMethod]
         public void Lookup_Test_Single_Unknown_Identity()
         {
-            var lookupTask = User.LookupAsync("bla", ProofType.Twitter);
+            var lookupTask = User.LookupAsync(UnknownUser, ProofType.Twitter);
             Assert.IsNotNull(lookupTask);
 
             var lookup = lookupTask.Result;
@@ -89,16 +97,39 @@ namespace KenBonny.KeybaseSharp.Tests
         [TestMethod]
         public void Autocomplete_Test()
         {
-            const string partial = "kenbo";
 
-            var autocompleteTask = User.AutocompleteAsync(partial);
+            var autocompleteTask = User.AutocompleteAsync(PartialUser);
             Assert.IsNotNull(autocompleteTask);
 
             var autocomplete = autocompleteTask.Result;
             Assert.IsTrue(
                 autocomplete.Completions.All(
-                    c => c.Components.Username.Value.Contains(partial) 
-                        || partial.Contains(c.Components.Username.Value)));
+                    c => c.Components.Username.Value.Contains(PartialUser) 
+                        || PartialUser.Contains(c.Components.Username.Value)));
+        }
+
+        [TestMethod]
+        public void Key_Test_Known_User()
+        {
+            var key = User.Key(KnownUser).Result;
+
+            Assert.IsFalse(string.IsNullOrWhiteSpace(key));
+            Assert.IsTrue(key.Contains("BEGIN PGP PUBLIC KEY BLOCK"));
+        }
+
+        [TestMethod]
+        public void Key_Test_Unknown_User()
+        {
+            try
+            {
+                var key = User.Key(UnknownUser).Result;
+                Assert.AreEqual("SELF-SIGNED PUBLIC KEY NOT FOUND", key);
+            }
+            catch (AggregateException ex)
+            {
+                Assert.AreEqual(1, ex.InnerExceptions.Count());
+                Assert.IsInstanceOfType(ex.InnerExceptions.First(), typeof(HttpRequestException));
+            }
         }
     }
 }

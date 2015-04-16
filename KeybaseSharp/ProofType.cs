@@ -5,10 +5,10 @@
     /// </summary>
     public enum ProofType
     {
-        Usernames,
+        Username,
         Twitter,
         Github,
-        Redit,
+        Reddit,
         HackerNews,
         Domain,
         Coinbase,

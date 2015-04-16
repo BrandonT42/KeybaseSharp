@@ -13,31 +13,47 @@ namespace KenBonny.KeybaseSharp
         /// <summary>
         /// Look a user up on Keybase.
         /// </summary>
-        /// <param name="username">Specify the username you want to look for 
+        /// <param name="username">Specify the username you want to look for.</param>
+        public async Task<LookupSingle> LookupAsync(string username)
+        {
+            var address = string.Format("_/api/{0}/user/lookup.json?username={1}"
+                , KeybaseApi.Version
+                , username);
+
+            return await KeybaseApi.Get<LookupSingle>(address);
+        }
+        /// <summary>
+        /// Look an identity up on Keybase.
+        /// </summary>
+        /// <param name="identity">Specify the username you want to look for 
         /// (can be a twitter handle, reddit login, etc.).</param>
         /// <param name="proofType">The type of username provided.</param>
         /// <returns>The details of a user on Keybase.</returns>
-        public Task<UserLookup> LookupAsync(string username, ProofType proofType)
-        {
-            return LookupAsync(new[] {username}, proofType);
-        }
-
-        /// <summary>
-        /// Look multilpe users up on Keybase.
-        /// </summary>
-        /// <param name="usernames">Specify the usernames you want to look for 
-        /// (can be a twitter handle, reddit login, etc.). Do not mix different types of usernames,
-        ///  all usernames or all twitter handles.</param>
-        /// <param name="proofType">The type of usernames provided.</param>
-        /// <returns>The details of the users on Keybase.</returns>
-        public async Task<UserLookup> LookupAsync(IEnumerable<string> usernames, ProofType proofType)
+        public async Task<LookupMultiple> LookupAsync(string identity, ProofType proofType)
         {
             var address = string.Format("_/api/{0}/user/lookup.json?{1}={2}"
                 , KeybaseApi.Version
                 , GetProofTypeDescription(proofType)
+                , identity);
+
+            return await KeybaseApi.Get<LookupMultiple>(address);
+        }
+
+        /// <summary>
+        /// If you pass a comma-separated usernames parameter with N names, you will get back
+        ///  a matching N-sized array, but with null for any users who could not be found.
+        ///  We imagine this is easier to deal with.\n
+        /// No need to specify a prooftype for this method, it will always be usernames.
+        /// </summary>
+        /// <param name="usernames">Specify the usernames you want to look for.</param>
+        /// <returns>The details of the users on Keybase.</returns>
+        public async Task<LookupMultiple> LookupAsync(IEnumerable<string> usernames)
+        {
+            var address = string.Format("_/api/{0}/user/lookup.json?usernames={1}"
+                , KeybaseApi.Version
                 , string.Join(",", usernames));
 
-            return await KeybaseApi.Get<UserLookup>(address);
+            return await KeybaseApi.Get<LookupMultiple>(address);
         }
 
         /// <summary>
@@ -51,6 +67,16 @@ namespace KenBonny.KeybaseSharp
             var address = string.Format("_/api/{0}/user/autocomplete.json?q={1}", KeybaseApi.Version, searchTerm);
 
             return await KeybaseApi.Get<UserAutocomplete>(address);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public async Task<string> Key(string username)
+        {
+            return null;
         }
 
         private string GetProofTypeDescription(ProofType proofType)

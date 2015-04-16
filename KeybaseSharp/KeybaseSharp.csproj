@@ -49,6 +49,7 @@
     <Compile Include="Model\BaseObject.cs" />
     <Compile Include="Model\User\Lookup\Basics.cs" />
     <Compile Include="Model\User\Lookup\BillingAndQuotas.cs" />
+    <Compile Include="Model\User\Lookup\LookupSingle.cs" />
     <Compile Include="Model\User\Lookup\SortedProof.cs" />
     <Compile Include="Model\User\Lookup\CryptocurrencyAddresses.cs">
       <SubType>Code</SubType>
@@ -62,7 +63,7 @@
     <Compile Include="Model\User\Lookup\Key.cs" />
     <Compile Include="Model\User\Lookup\Signature.cs" />
     <Compile Include="Model\User\Autocomplete\UserAutocomplete.cs" />
-    <Compile Include="Model\User\Lookup\UserLookup.cs">
+    <Compile Include="Model\User\Lookup\LookupMultiple.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\User\Lookup\Pictures.cs" />

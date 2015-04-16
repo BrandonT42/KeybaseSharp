@@ -75,7 +75,7 @@ namespace KenBonny.KeybaseSharp
         {
             var address = string.Format("{0}/key.asc", username);
 
-            return await KeybaseApi.Get<string>(address);
+            return await KeybaseApi.Get(address);
         }
 
         private string GetProofTypeDescription(ProofType proofType)

@@ -16,6 +16,9 @@ namespace KenBonny.KeybaseSharp
 
         private static readonly Uri BaseLocation = new Uri("https://keybase.io/");
 
+        /// <summary>
+        /// Get the parsed result from Keybase.
+        /// </summary>
         internal static async Task<T> Get<T>(string address)
         {
             HttpResponseMessage userLookupResponse;
@@ -34,6 +37,26 @@ namespace KenBonny.KeybaseSharp
             var specific = JsonConvert.DeserializeObject<T>(json);
 
             return specific;
+        }
+
+        /// <summary>
+        /// Get the raw result from Keybase
+        /// </summary>
+        internal static async Task<string> Get(string address)
+        {
+            HttpResponseMessage userLookupResponse;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = BaseLocation;
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                userLookupResponse = await client.GetAsync(address);
+            }
+            userLookupResponse.EnsureSuccessStatusCode();
+
+            return await userLookupResponse.Content.ReadAsStringAsync();
         }
     }
 }

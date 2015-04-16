@@ -7,9 +7,6 @@ namespace KenBonny.KeybaseSharp
 {
     public class User
     {
-        private static readonly string AutocompleteAddress = string.Format("_/api/{0}/user/autocomplete.json?q=",
-            KeybaseApi.Version);
-
         /// <summary>
         /// Look a user up on Keybase.
         /// </summary>
@@ -40,10 +37,10 @@ namespace KenBonny.KeybaseSharp
         }
 
         /// <summary>
-        /// If you pass a comma-separated usernames parameter with N names, you will get back
-        ///  a matching N-sized array, but with null for any users who could not be found.
-        ///  We imagine this is easier to deal with.\n
-        /// No need to specify a prooftype for this method, it will always be usernames.
+        /// Look up multiple users.
+        /// If you pass in a list with N names, you will get back a matching N-sized array,
+        ///  but with null for any users who could not be found.We imagine this is easier to deal with.
+        /// No need to specify a prooftype for this method, you will always specify usernames.
         /// </summary>
         /// <param name="usernames">Specify the usernames you want to look for.</param>
         /// <returns>The details of the users on Keybase.</returns>
@@ -70,13 +67,15 @@ namespace KenBonny.KeybaseSharp
         }
 
         /// <summary>
-        /// 
+        /// Fetches the users public key.
         /// </summary>
-        /// <param name="username"></param>
-        /// <returns></returns>
+        /// <param name="username">The user whose key we should fetch.</param>
+        /// <returns>The public PGP key.</returns>
         public async Task<string> Key(string username)
         {
-            return null;
+            var address = string.Format("{0}/key.asc", username);
+
+            return await KeybaseApi.Get<string>(address);
         }
 
         private string GetProofTypeDescription(ProofType proofType)

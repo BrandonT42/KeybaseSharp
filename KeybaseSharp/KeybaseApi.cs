@@ -17,7 +17,6 @@ namespace KenBonny.KeybaseSharp
         private static readonly Uri BaseLocation = new Uri("https://keybase.io/");
 
         internal static async Task<T> Get<T>(string address)
-            where T : BaseObject
         {
             HttpResponseMessage userLookupResponse;
 

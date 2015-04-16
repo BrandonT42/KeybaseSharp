@@ -7,6 +7,6 @@ namespace KenBonny.KeybaseSharp.Model.User.Autocomplete
         [JsonProperty(PropertyName = "val")]
         public string Value { get; set; }
 
-        public int Score { get; set; }
+        public double Score { get; set; }
     }
 }

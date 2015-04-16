@@ -2,6 +2,6 @@ namespace KenBonny.KeybaseSharp.Model
 {
     public class Emails
     {
-        public Primary Primary { get; set; }
+        public Email Primary { get; set; }
     }
 }

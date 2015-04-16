@@ -62,7 +62,7 @@
     </Compile>
     <Compile Include="Model\Pictures.cs" />
     <Compile Include="Model\Plan.cs" />
-    <Compile Include="Model\Primary.cs" />
+    <Compile Include="Model\Email.cs" />
     <Compile Include="Model\PrivateKeys.cs" />
     <Compile Include="Model\Profile.cs" />
     <Compile Include="Model\Proof.cs" />
@@ -71,7 +71,7 @@
     <Compile Include="Model\Sibkeys.cs" />
     <Compile Include="Model\Sigs.cs" />
     <Compile Include="Model\Subkeys.cs" />
-    <Compile Include="Model\Them.cs" />
+    <Compile Include="Model\KeybaseUser.cs" />
     <Compile Include="Model\Usage.cs" />
     <Compile Include="ProofType.cs" />
     <Compile Include="User.cs">

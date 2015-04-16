@@ -1,7 +1,9 @@
+using System.Collections.Generic;
+
 namespace KenBonny.KeybaseSharp.Model
 {
     public class UserLookup : BaseObject
     {
-        public Them Them { get; set; }
+        public IEnumerable<KeybaseUser> Them { get; set; }
     }
 }

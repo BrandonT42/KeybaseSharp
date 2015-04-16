@@ -5,8 +5,9 @@ namespace KenBonny.KeybaseSharp.Model
         public string Kid { get; set; }
         public int KeyType { get; set; }
         public string Bundle { get; set; }
-        public Ctime Mtime { get; set; }
-        public Ctime Ctime { get; set; }
+        // todo ctime
+        public long Mtime { get; set; }
+        public long Ctime { get; set; }
         public string Ukbid { get; set; }
         public string KeyFingerprint { get; set; }
         public int KeyBits { get; set; }

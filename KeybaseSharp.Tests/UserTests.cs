@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using KenBonny.KeybaseSharp.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -131,6 +131,65 @@ namespace KenBonny.KeybaseSharp.Tests
                 Assert.AreEqual(1, ex.InnerExceptions.Count());
                 Assert.IsInstanceOfType(ex.InnerExceptions.First(), typeof(HttpRequestException));
             }
+        }
+
+        [TestMethod]
+        public void Discover_Test_Known_User()
+        {
+            var identities = new Dictionary<ProofType, IEnumerable<string>>
+            {
+                {ProofType.Twitter, new[] {KnwonTwitter}}
+            };
+            var discoverTask = User.DiscoverAsync(identities);
+            Assert.IsNotNull(discoverTask);
+
+            var discover = discoverTask.Result;
+            Assert.AreEqual(KnownUserFullName, discover.Matches.First().FullName);
+            Assert.AreEqual(KnownUser, discover.Matches.First().Username);
+        }
+
+        [TestMethod]
+        public void Discover_Test_Unknown_User()
+        {
+            var identities = new Dictionary<ProofType, IEnumerable<string>>
+            {
+                {ProofType.Twitter, new[] {UnknownUser}}
+            };
+            var discoverTask = User.DiscoverAsync(identities);
+            Assert.IsNotNull(discoverTask);
+
+            var discover = discoverTask.Result;
+            Assert.AreEqual(0, discover.Matches.Count());
+            Assert.IsFalse(discover.Matches.Any());
+        }
+
+        [TestMethod]
+        public void DiscoverUsernames_Test_Known_User()
+        {
+            var identities = new Dictionary<ProofType, IEnumerable<string>>
+            {
+                {ProofType.Twitter, new[] {KnwonTwitter}}
+            };
+            var discoverTask = User.DiscoverUsernamesAsync(identities);
+            Assert.IsNotNull(discoverTask);
+
+            var discover = discoverTask.Result;
+            Assert.AreEqual(KnownUser, discover.Matches.First());
+        }
+
+        [TestMethod]
+        public void Discover_Usernames_Test_Unknown_User()
+        {
+            var identities = new Dictionary<ProofType, IEnumerable<string>>
+            {
+                {ProofType.Twitter, new[] {UnknownUser}}
+            };
+            var discoverTask = User.DiscoverUsernamesAsync(identities);
+            Assert.IsNotNull(discoverTask);
+
+            var discover = discoverTask.Result;
+            Assert.AreEqual(0, discover.Matches.Count());
+            Assert.IsFalse(discover.Matches.Any());
         }
     }
 }

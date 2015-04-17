@@ -4,9 +4,9 @@ namespace KenBonny.KeybaseSharp.Model
 {
     public class Ctime
     {
-        public DateTime UtcDateTime { get; set; }
+        public DateTime UtcDateTime { get; private set; }
 
-        public DateTime LocalDateTime { get; set; }
+        public DateTime LocalDateTime { get; private set; }
 
         public Ctime(long ctime)
         {

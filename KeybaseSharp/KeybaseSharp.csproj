@@ -45,6 +45,13 @@
     <Compile Include="Model\User\Autocomplete\KeyFingerprint.cs" />
     <Compile Include="Model\User\Autocomplete\UserHandle.cs" />
     <Compile Include="Model\User\Autocomplete\Website.cs" />
+    <Compile Include="Model\User\Discover\Discover.cs" />
+    <Compile Include="Model\User\Discover\DiscoverUsernames.cs" />
+    <Compile Include="Model\User\Discover\Dns.cs" />
+    <Compile Include="Model\User\Discover\Key.cs" />
+    <Compile Include="Model\User\Discover\Match.cs" />
+    <Compile Include="Model\User\Discover\RemoteProofs.cs" />
+    <Compile Include="Model\User\Discover\WebSite.cs" />
     <Compile Include="Model\User\Lookup\All.cs" />
     <Compile Include="Model\BaseObject.cs" />
     <Compile Include="Model\User\Lookup\Basics.cs" />
@@ -77,9 +84,9 @@
     <Compile Include="Model\User\Lookup\Sibkeys.cs" />
     <Compile Include="Model\User\Lookup\Signatures.cs" />
     <Compile Include="Model\User\Lookup\Subkeys.cs" />
-    <Compile Include="Model\User\Lookup\KeybaseUser.cs" />
+    <Compile Include="Model\User\Lookup\User.cs" />
     <Compile Include="Model\User\Lookup\Usage.cs" />
-    <Compile Include="ProofType.cs" />
+    <Compile Include="Model\ProofType.cs" />
     <Compile Include="User.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -92,9 +99,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\User\Discover\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

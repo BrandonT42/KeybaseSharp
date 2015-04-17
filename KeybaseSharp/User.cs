@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using KenBonny.KeybaseSharp.Model;
 using KenBonny.KeybaseSharp.Model.User.Autocomplete;
+using KenBonny.KeybaseSharp.Model.User.Discover;
 using KenBonny.KeybaseSharp.Model.User.Lookup;
 
 namespace KenBonny.KeybaseSharp
@@ -77,6 +78,44 @@ namespace KenBonny.KeybaseSharp
             var address = string.Format("{0}/key.asc", username);
 
             return await KeybaseApi.Get(address);
+        }
+
+        /// <summary>
+        /// If you have a list of twitter usernames, github usernames, websites, etc., 
+        /// this service will provide you with a matching list of Keybase users. 
+        /// The result is flattened, this removes duplicates.
+        /// </summary>
+        /// <param name="identities">The identities you want to look for.</param>
+        /// <returns>A list of all the discoverd users.</returns>
+        public async Task<Discover> DiscoverAsync(IDictionary<ProofType, IEnumerable<string>> identities)
+        {
+            var address = string.Format("_/api/{0}/user/discover.json?flatten=1", KeybaseApi.Version);
+
+            foreach (var identity in identities)
+            {
+                address += string.Format("&{0}={1}", identity.Key.ToString().ToLower(), string.Join(",", identity.Value));
+            }
+
+            return await KeybaseApi.Get<Discover>(address);
+        }
+
+        /// <summary>
+        /// If you have a list of twitter usernames, github usernames, websites, etc., 
+        /// this service will provide you with a matching list of Keybase users. 
+        /// The result is flattened, this removes duplicates.
+        /// </summary>
+        /// <param name="identities">The identities you want to look for.</param>
+        /// <returns>A list of usernames of the found users, no additional information.</returns>
+        public async Task<DiscoverUsernames> DiscoverUsernamesAsync(IDictionary<ProofType, IEnumerable<string>> identities)
+        {
+            var address = string.Format("_/api/{0}/user/discover.json?flatten=1&usernames_only=1", KeybaseApi.Version);
+
+            foreach (var identity in identities)
+            {
+                address += string.Format("&{0}={1}", identity.Key.ToString().ToLower(), string.Join(",", identity.Value));
+            }
+
+            return await KeybaseApi.Get<DiscoverUsernames>(address);
         }
 
         private string GetProofTypeDescription(ProofType proofType)

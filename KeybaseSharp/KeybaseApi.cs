@@ -7,11 +7,16 @@ using Newtonsoft.Json;
 namespace KenBonny.KeybaseSharp
 {
     /// <summary>
-    /// The constants of the application
+    /// Set details for the Keybase API connection.
     /// </summary>
-    internal static class KeybaseApi
+    public static class KeybaseApi
     {
         internal const string Version = "1.0";
+
+        /// <summary>
+        /// Set the HttpClientHandler that will be used by the HttpClient to connect to the Keybase API.
+        /// </summary>
+        public static HttpClientHandler HttpClientHandler = new HttpClientHandler();
 
         private static readonly Uri BaseLocation = new Uri("https://keybase.io/");
 
@@ -22,7 +27,7 @@ namespace KenBonny.KeybaseSharp
         {
             HttpResponseMessage userLookupResponse;
 
-            using (var client = new HttpClient())
+            using (var client = new HttpClient(HttpClientHandler))
             {
                 client.BaseAddress = BaseLocation;
                 client.DefaultRequestHeaders.Accept.Clear();

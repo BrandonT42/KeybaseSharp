@@ -25,22 +25,8 @@ namespace KenBonny.KeybaseSharp
         /// </summary>
         internal static async Task<T> Get<T>(string address)
         {
-            HttpResponseMessage userLookupResponse;
-
-            using (var client = new HttpClient(HttpClientHandler))
-            {
-                client.BaseAddress = BaseLocation;
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                userLookupResponse = await client.GetAsync(address);
-            }
-            userLookupResponse.EnsureSuccessStatusCode();
-
-            var json = await userLookupResponse.Content.ReadAsStringAsync();
-            var specific = JsonConvert.DeserializeObject<T>(json);
-
-            return specific;
+            var json = await Get(address);
+            return JsonConvert.DeserializeObject<T>(json);
         }
 
         /// <summary>
@@ -48,19 +34,17 @@ namespace KenBonny.KeybaseSharp
         /// </summary>
         internal static async Task<string> Get(string address)
         {
-            HttpResponseMessage userLookupResponse;
-
-            using (var client = new HttpClient())
+            using (var client = new HttpClient(HttpClientHandler))
             {
                 client.BaseAddress = BaseLocation;
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                userLookupResponse = await client.GetAsync(address);
-            }
-            userLookupResponse.EnsureSuccessStatusCode();
+                var response = await client.GetAsync(address);
+                response.EnsureSuccessStatusCode();
 
-            return await userLookupResponse.Content.ReadAsStringAsync();
+                return await response.Content.ReadAsStringAsync();
+            }
         }
     }
 }

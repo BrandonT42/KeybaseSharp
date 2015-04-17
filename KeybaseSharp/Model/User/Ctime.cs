@@ -1,6 +1,6 @@
 using System;
 
-namespace KenBonny.KeybaseSharp.Model.User.Lookup
+namespace KenBonny.KeybaseSharp.Model.User
 {
     public class Ctime
     {

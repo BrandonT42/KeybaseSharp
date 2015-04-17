@@ -1,4 +1,4 @@
-﻿namespace KenBonny.KeybaseSharp
+﻿namespace KenBonny.KeybaseSharp.Model
 {
     /// <summary>
     /// The types of proof you can specify.

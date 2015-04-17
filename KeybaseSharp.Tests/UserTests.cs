@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using KenBonny.KeybaseSharp.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace KenBonny.KeybaseSharp.Tests

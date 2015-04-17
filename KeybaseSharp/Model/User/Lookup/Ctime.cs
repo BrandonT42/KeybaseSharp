@@ -4,15 +4,15 @@ namespace KenBonny.KeybaseSharp.Model.User.Lookup
 {
     public class Ctime
     {
-        public DateTime DateTime { get; set; }
+        public DateTime UtcDateTime { get; set; }
 
-        public DateTime DateTimeLocal { get; set; }
+        public DateTime LocalDateTime { get; set; }
 
         public Ctime(long ctime)
         {
             var span = TimeSpan.FromTicks(ctime * TimeSpan.TicksPerSecond);
-            DateTime = new DateTime(1970, 1, 1).Add(span);
-            DateTimeLocal = TimeZone.CurrentTimeZone.ToLocalTime(DateTime);
+            UtcDateTime = new DateTime(1970, 1, 1).Add(span);
+            LocalDateTime = TimeZone.CurrentTimeZone.ToLocalTime(UtcDateTime);
         }
 
         public static implicit operator Ctime(long ctime)

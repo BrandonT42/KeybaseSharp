@@ -11,9 +11,9 @@ namespace KenBonny.KeybaseSharp.Model.User.Lookup
 
         public string Bundle { get; set; }
         
-        public Ctime Mtime { get; set; }
+        public long Mtime { get; set; }
         
-        public Ctime Ctime { get; set; }
+        public long Ctime { get; set; }
         
         public string Ukbid { get; set; }
 

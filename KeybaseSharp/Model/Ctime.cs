@@ -2,6 +2,7 @@ using System;
 
 namespace KenBonny.KeybaseSharp.Model
 {
+    // todo find out what ctime is
     public class Ctime
     {
         public DateTime UtcDateTime { get; private set; }

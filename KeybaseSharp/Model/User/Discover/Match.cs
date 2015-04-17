@@ -16,7 +16,7 @@ namespace KenBonny.KeybaseSharp.Model.User.Discover
         [JsonProperty(PropertyName = "full_name")]
         public string FullName { get; set; }
         
-        public Ctime Ctime { get; set; }
+        public long Ctime { get; set; }
 
         [JsonProperty(PropertyName = "remote_proofs")]
         public RemoteProofs RemoteProofs { get; set; }

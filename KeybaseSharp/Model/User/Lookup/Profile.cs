@@ -4,7 +4,7 @@ namespace KenBonny.KeybaseSharp.Model.User.Lookup
 {
     public class Profile
     {
-        public Ctime Mtime { get; set; }
+        public long Mtime { get; set; }
 
         [JsonProperty(PropertyName = "full_name")]
         public string FullName { get; set; }

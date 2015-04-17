@@ -18,6 +18,11 @@ namespace KenBonny.KeybaseSharp
         /// </summary>
         public static HttpClientHandler HttpClientHandler = new HttpClientHandler();
 
+        /// <summary>
+        /// The HttpClient that will make the call to the webservice.
+        /// </summary>
+        public static HttpClient HttpClient = new HttpClient(HttpClientHandler, false);
+
         private static readonly Uri BaseLocation = new Uri("https://keybase.io/");
 
         /// <summary>
@@ -30,21 +35,21 @@ namespace KenBonny.KeybaseSharp
         }
 
         /// <summary>
-        /// Get the raw result from Keybase
+        /// Get the raw result from Keybase.
         /// </summary>
         internal static async Task<string> Get(string address)
         {
-            using (var client = new HttpClient(HttpClientHandler))
+            if (HttpClient.BaseAddress == null)
             {
-                client.BaseAddress = BaseLocation;
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var response = await client.GetAsync(address);
-                response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadAsStringAsync();
+                HttpClient.BaseAddress = BaseLocation;
+                HttpClient.DefaultRequestHeaders.Accept.Clear();
+                HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             }
+
+            var response = await HttpClient.GetAsync(address);
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsStringAsync();
         }
     }
 }

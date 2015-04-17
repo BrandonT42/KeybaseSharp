@@ -14,14 +14,11 @@ namespace KenBonny.KeybaseSharp
         internal const string Version = "1.0";
 
         /// <summary>
-        /// Set the HttpClientHandler that will be used by the HttpClient to connect to the Keybase API.
+        /// The HttpClient that will make the calls to the Keybase API.
         /// </summary>
-        public static HttpClientHandler HttpClientHandler = new HttpClientHandler();
-
-        /// <summary>
-        /// The HttpClient that will make the call to the webservice.
-        /// </summary>
-        public static HttpClient HttpClient = new HttpClient(HttpClientHandler, false);
+        // ReSharper disable once FieldCanBeMadeReadOnly.Global
+        // ReSharper disable once MemberCanBePrivate.Global
+        public static HttpClient HttpClient = new HttpClient();
 
         private static readonly Uri BaseLocation = new Uri("https://keybase.io/");
 

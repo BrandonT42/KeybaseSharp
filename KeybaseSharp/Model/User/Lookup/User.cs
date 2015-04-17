@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace KenBonny.KeybaseSharp.Model.User.Lookup
 {
-    public class KeybaseUser
+    public class User
     {
         // todo implement cryptocurrencyaddress and devices
         public string Id { get; set; }

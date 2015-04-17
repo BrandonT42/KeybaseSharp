@@ -2,7 +2,7 @@
 
 namespace KenBonny.KeybaseSharp.Model.User.Autocomplete
 {
-    public class UserAutocomplete : BaseObject
+    public class Autocomplete : BaseObject
     {
         public List<Completion> Completions { get; set; }
     }

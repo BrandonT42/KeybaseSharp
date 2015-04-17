@@ -62,7 +62,7 @@
     <Compile Include="Model\User\Lookup\InvitationStats.cs" />
     <Compile Include="Model\User\Lookup\Key.cs" />
     <Compile Include="Model\User\Lookup\Signature.cs" />
-    <Compile Include="Model\User\Autocomplete\UserAutocomplete.cs" />
+    <Compile Include="Model\User\Autocomplete\Autocomplete.cs" />
     <Compile Include="Model\User\Lookup\LookupMultiple.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -91,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\User\Discover\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

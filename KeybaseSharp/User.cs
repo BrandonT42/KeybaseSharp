@@ -59,11 +59,11 @@ namespace KenBonny.KeybaseSharp
         /// </summary>
         /// <param name="searchTerm">Can match Keybase usernames, full names, identity usernames, and key fingerprints.</param>
         /// <returns></returns>
-        public async Task<UserAutocomplete> AutocompleteAsync(string searchTerm)
+        public async Task<Autocomplete> AutocompleteAsync(string searchTerm)
         {
             var address = string.Format("_/api/{0}/user/autocomplete.json?q={1}", KeybaseApi.Version, searchTerm);
 
-            return await KeybaseApi.Get<UserAutocomplete>(address);
+            return await KeybaseApi.Get<Autocomplete>(address);
         }
 
         /// <summary>

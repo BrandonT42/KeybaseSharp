@@ -25,16 +25,16 @@ namespace KenBonny.KeybaseSharp
         /// <summary>
         /// Get the parsed result from Keybase.
         /// </summary>
-        internal static async Task<T> Get<T>(string address)
+        internal static Task<T> Get<T>(string address)
         {
-            var json = await Get(address);
-            return JsonConvert.DeserializeObject<T>(json);
+            var json = Get(address).Result;
+            return Task.Factory.StartNew(() => JsonConvert.DeserializeObject<T>(json));
         }
 
         /// <summary>
         /// Get the raw result from Keybase.
         /// </summary>
-        internal static async Task<string> Get(string address)
+        internal static Task<string> Get(string address)
         {
             if (HttpClient.BaseAddress == null)
             {
@@ -43,10 +43,10 @@ namespace KenBonny.KeybaseSharp
                 HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             }
 
-            var response = await HttpClient.GetAsync(address);
+            var response = HttpClient.GetAsync(address).Result;
             response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadAsStringAsync();
+            return response.Content.ReadAsStringAsync();
         }
     }
 }

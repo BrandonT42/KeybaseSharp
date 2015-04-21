@@ -13,14 +13,15 @@ namespace KenBonny.KeybaseSharp
         /// Look a user up on Keybase.
         /// </summary>
         /// <param name="username">Specify the username you want to look for.</param>
-        public async Task<LookupSingle> LookupAsync(string username)
+        public Task<LookupSingle> LookupAsync(string username)
         {
             var address = string.Format("_/api/{0}/user/lookup.json?username={1}"
                 , KeybaseApi.Version
                 , username);
 
-            return await KeybaseApi.Get<LookupSingle>(address);
+            return KeybaseApi.Get<LookupSingle>(address);
         }
+
         /// <summary>
         /// Look an identity up on Keybase.
         /// </summary>
@@ -28,14 +29,14 @@ namespace KenBonny.KeybaseSharp
         /// (can be a twitter handle, reddit login, etc.).</param>
         /// <param name="proofType">The type of username provided.</param>
         /// <returns>The details of a user on Keybase.</returns>
-        public async Task<LookupMultiple> LookupAsync(string identity, ProofType proofType)
+        public Task<LookupMultiple> LookupAsync(string identity, ProofType proofType)
         {
             var address = string.Format("_/api/{0}/user/lookup.json?{1}={2}"
                 , KeybaseApi.Version
                 , GetProofTypeDescription(proofType)
                 , identity);
 
-            return await KeybaseApi.Get<LookupMultiple>(address);
+            return  KeybaseApi.Get<LookupMultiple>(address);
         }
 
         /// <summary>
@@ -46,13 +47,13 @@ namespace KenBonny.KeybaseSharp
         /// </summary>
         /// <param name="usernames">Specify the usernames you want to look for.</param>
         /// <returns>The details of the users on Keybase.</returns>
-        public async Task<LookupMultiple> LookupAsync(IEnumerable<string> usernames)
+        public Task<LookupMultiple> LookupAsync(IEnumerable<string> usernames)
         {
             var address = string.Format("_/api/{0}/user/lookup.json?usernames={1}"
                 , KeybaseApi.Version
                 , string.Join(",", usernames));
 
-            return await KeybaseApi.Get<LookupMultiple>(address);
+            return KeybaseApi.Get<LookupMultiple>(address);
         }
 
         /// <summary>
@@ -61,11 +62,11 @@ namespace KenBonny.KeybaseSharp
         /// </summary>
         /// <param name="searchTerm">Can match Keybase usernames, full names, identity usernames, and key fingerprints.</param>
         /// <returns></returns>
-        public async Task<Autocomplete> AutocompleteAsync(string searchTerm)
+        public Task<Autocomplete> AutocompleteAsync(string searchTerm)
         {
             var address = string.Format("_/api/{0}/user/autocomplete.json?q={1}", KeybaseApi.Version, searchTerm);
 
-            return await KeybaseApi.Get<Autocomplete>(address);
+            return KeybaseApi.Get<Autocomplete>(address);
         }
 
         /// <summary>
@@ -73,11 +74,11 @@ namespace KenBonny.KeybaseSharp
         /// </summary>
         /// <param name="username">The user whose key we should fetch.</param>
         /// <returns>The public PGP key.</returns>
-        public async Task<string> Key(string username)
+        public Task<string> Key(string username)
         {
             var address = string.Format("{0}/key.asc", username);
 
-            return await KeybaseApi.Get(address);
+            return KeybaseApi.Get(address);
         }
 
         /// <summary>
@@ -87,7 +88,7 @@ namespace KenBonny.KeybaseSharp
         /// </summary>
         /// <param name="identities">The identities you want to look for.</param>
         /// <returns>A list of all the discoverd users.</returns>
-        public async Task<Discover> DiscoverAsync(IDictionary<ProofType, IEnumerable<string>> identities)
+        public Task<Discover> DiscoverAsync(IDictionary<ProofType, IEnumerable<string>> identities)
         {
             var address = string.Format("_/api/{0}/user/discover.json?flatten=1", KeybaseApi.Version);
 
@@ -96,7 +97,7 @@ namespace KenBonny.KeybaseSharp
                 address += string.Format("&{0}={1}", identity.Key.ToString().ToLower(), string.Join(",", identity.Value));
             }
 
-            return await KeybaseApi.Get<Discover>(address);
+            return KeybaseApi.Get<Discover>(address);
         }
 
         /// <summary>
@@ -106,7 +107,7 @@ namespace KenBonny.KeybaseSharp
         /// </summary>
         /// <param name="identities">The identities you want to look for.</param>
         /// <returns>A list of usernames of the found users, no additional information.</returns>
-        public async Task<DiscoverUsernames> DiscoverUsernamesAsync(IDictionary<ProofType, IEnumerable<string>> identities)
+        public Task<DiscoverUsernames> DiscoverUsernamesAsync(IDictionary<ProofType, IEnumerable<string>> identities)
         {
             var address = string.Format("_/api/{0}/user/discover.json?flatten=1&usernames_only=1", KeybaseApi.Version);
 
@@ -115,7 +116,7 @@ namespace KenBonny.KeybaseSharp
                 address += string.Format("&{0}={1}", identity.Key.ToString().ToLower(), string.Join(",", identity.Value));
             }
 
-            return await KeybaseApi.Get<DiscoverUsernames>(address);
+            return KeybaseApi.Get<DiscoverUsernames>(address);
         }
 
         private string GetProofTypeDescription(ProofType proofType)

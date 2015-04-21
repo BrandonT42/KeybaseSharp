@@ -126,10 +126,9 @@ namespace KenBonny.KeybaseSharp.Tests
                 var key = User.Key(UnknownUser).Result;
                 Assert.AreEqual("SELF-SIGNED PUBLIC KEY NOT FOUND", key);
             }
-            catch (AggregateException ex)
+            catch (Exception ex)
             {
-                Assert.AreEqual(1, ex.InnerExceptions.Count());
-                Assert.IsInstanceOfType(ex.InnerExceptions.First(), typeof(HttpRequestException));
+                Assert.IsInstanceOfType(ex, typeof(HttpRequestException));
             }
         }
 

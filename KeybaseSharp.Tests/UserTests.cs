@@ -10,18 +10,11 @@ namespace KenBonny.KeybaseSharp.Tests
     [TestClass]
     public class UserTests
     {
-        private User User { get; set; }
         private const string KnownUser = "kenbonny";
         private const string KnwonTwitter = "bonny_ken";
         private const string KnownUserFullName = "Ken Bonny";
         private const string PartialUser = "kenbo";
         private const string UnknownUser = "bla";
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            User = new User();
-        }
 
         [TestMethod]
         public void Lookup_Test_Single_Known_User()

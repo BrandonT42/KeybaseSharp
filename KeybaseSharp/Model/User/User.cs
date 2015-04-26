@@ -1,6 +1,7 @@
+using KenBonny.KeybaseSharp.Model.User.Lookup;
 using Newtonsoft.Json;
 
-namespace KenBonny.KeybaseSharp.Model.User.Lookup
+namespace KenBonny.KeybaseSharp.Model.User
 {
     public class User
     {

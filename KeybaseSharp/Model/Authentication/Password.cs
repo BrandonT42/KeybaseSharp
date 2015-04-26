@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using CryptSharp;
 using CryptSharp.Utility;
 using KenBonny.KeybaseSharp.Utility;
 

@@ -16,11 +16,5 @@ namespace KenBonny.KeybaseSharp.Model.Authentication
 
         [JsonProperty(PropertyName = "pwh_version")]
         public int Version { get; set; }
-
-        private static string ByteArrayToString(byte[] bytes)
-        {
-            var hex = BitConverter.ToString(bytes);
-            return hex.Replace("-", "");
-        }
     }
 }

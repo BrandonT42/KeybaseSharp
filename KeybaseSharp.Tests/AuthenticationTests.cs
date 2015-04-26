@@ -13,7 +13,7 @@ namespace KenBonny.KeybaseSharp.Tests
         [TestMethod]
         public void Authenticate_Known_User()
         {
-            var loginTask = KeybaseApi.Authenticate(KnownUser, "Fill in when necessary");
+            var loginTask = KeybaseApi.Authenticate(KnownUser, "Fill in when needed");
             Assert.IsNotNull(loginTask);
 
             var login = loginTask.Result;
@@ -38,16 +38,9 @@ namespace KenBonny.KeybaseSharp.Tests
         {
             var loginTask = KeybaseApi.Authenticate(UnknownUser, "DoesntMatter");
             Assert.IsNotNull(loginTask);
-
-            try
-            {
-                var login = loginTask.Result;
-                Assert.IsTrue(login.Status.Code != 0);
-            }
-            catch (Exception exception)
-            {
-                Assert.IsNotNull(exception);
-            }
+            
+            var login = loginTask.Result;
+            Assert.IsTrue(login.Status.Code != 0);
         }
     }
 }

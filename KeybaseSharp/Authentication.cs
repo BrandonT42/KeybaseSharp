@@ -20,8 +20,7 @@ namespace KenBonny.KeybaseSharp
 
         internal static Task<Login> LoginAsync(string username, Password password, string session)
         {
-            var address = string.Format("_/api/1.0/login.json?email_or_username={0}&hmac_pwh={1}&login_session={2}",
-                username, password, session);
+            const string address = "_/api/1.0/login.json";
 
             var parameters = new List<KeyValuePair<string, string>>
             {

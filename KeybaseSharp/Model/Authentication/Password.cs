@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
+using System.Text;
 using CryptSharp;
 using CryptSharp.Utility;
 using KenBonny.KeybaseSharp.Utility;
@@ -43,10 +44,10 @@ namespace KenBonny.KeybaseSharp.Model.Authentication
             return SCrypt.ComputeDerivedKey(key, bytesFromSalt, n, r, p, null, derivedKeyLength);
         }
 
-        private static string CreateHmacPasswordHash(byte[] hash, string session)
+        private static string CreateHmacPasswordHash(byte[] passwordHash, string session)
         {
-            var hmac = new HMACSHA512(hash);
             var base64Session = Convert.FromBase64String(session);
+            var hmac = new HMACSHA512(passwordHash);
             var hmacHash = hmac.ComputeHash(base64Session);
 
             return ByteArrayToString(hmacHash);
@@ -54,14 +55,21 @@ namespace KenBonny.KeybaseSharp.Model.Authentication
 
         private static byte[] StringToByteArray(string text)
         {
-            var bytes = new byte[text.Length * sizeof(char)];
-            Buffer.BlockCopy(text.ToCharArray(), 0, bytes, 0, bytes.Length);
-            return bytes;
+            //var bytes = new byte[text.Length * sizeof(char)];
+            //Buffer.BlockCopy(text.ToCharArray(), 0, bytes, 0, bytes.Length);
+            //return bytes;
+
+            return Encoding.UTF8.GetBytes(text);
         }
 
         private static string ByteArrayToString(byte[] bytes)
         {
-            return BitConverter.ToString(bytes).Replace("-", "");
+            var hex = new StringBuilder();
+            foreach (var @byte in bytes)
+            {
+                hex.Append(@byte.ToString("X2"));
+            }
+            return hex.ToString();
         }
     }
 }

@@ -70,6 +70,8 @@ namespace KenBonny.KeybaseSharp
         internal static Task<T> Post<T>(string address, IEnumerable<KeyValuePair<string, string>> parameters)
             where T: BaseObject
         {
+            parameters = parameters ?? new KeyValuePair<string, string>[0];
+
             var content = new FormUrlEncodedContent(parameters);
             var json = MakeHttpCall(() => HttpClient.PostAsync(address, content)).Result;
 
@@ -84,18 +86,18 @@ namespace KenBonny.KeybaseSharp
             var salt = Authentication.GetSaltAsync(username).Result;
             var securePassword = new Password(password, salt);
             
-            var loginTask = Authentication.LoginAsync(username, securePassword, salt.Session)
-                .ContinueWith(task =>
+            var loginTask = Authentication.LoginAsync(username, securePassword, salt.Session);
+            loginTask.ContinueWith(task =>
+            {
+                var login = task.Result;
+                if (login.Status.Code.Equals(0))
                 {
-                    var login = task.Result;
-                    if (login.Status.Code.Equals(0))
-                    {
-                        var cookie = new Cookie("Session", login.Session);
-                        CookieContainer.Add(cookie);   
-                    }
+                    var cookie = new Cookie("Session", login.Session);
+                    CookieContainer.Add(cookie);   
+                }
 
-                    return login;
-                });
+                return login;
+            });
 
             return loginTask;
         }

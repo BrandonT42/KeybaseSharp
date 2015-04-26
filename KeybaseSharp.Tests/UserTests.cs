@@ -10,7 +10,6 @@ namespace KenBonny.KeybaseSharp.Tests
     [TestClass]
     public class UserTests
     {
-        private User User { get; set; }
         private const string KnownUser = "kenbonny";
         private const string KnwonTwitter = "bonny_ken";
         private const string KnownUserFullName = "Ken Bonny";
@@ -20,13 +19,12 @@ namespace KenBonny.KeybaseSharp.Tests
         [TestInitialize]
         public void Initialize()
         {
-            User = new User();
         }
 
         [TestMethod]
         public void Lookup_Test_Single_Known_User()
         {
-            var lookupTask = User.LookupAsync(KnownUser);
+            var lookupTask = KeybaseApi.User.LookupAsync(KnownUser);
             Assert.IsNotNull(lookupTask);
 
             var lookup = lookupTask.Result;
@@ -37,7 +35,7 @@ namespace KenBonny.KeybaseSharp.Tests
         [TestMethod]
         public void Lookup_Test_Single_Known_Identity()
         {
-            var lookupTask = User.LookupAsync(KnwonTwitter, ProofType.Twitter);
+            var lookupTask = KeybaseApi.User.LookupAsync(KnwonTwitter, ProofType.Twitter);
             Assert.IsNotNull(lookupTask);
 
             var lookup = lookupTask.Result;
@@ -49,7 +47,7 @@ namespace KenBonny.KeybaseSharp.Tests
         [TestMethod]
         public void Lookup_Test_Multiple_Known_Users()
         {
-            var lookupTask = User.LookupAsync(new[] {KnownUser, "ken"});
+            var lookupTask = KeybaseApi.User.LookupAsync(new[] { KnownUser, "ken" });
             Assert.IsNotNull(lookupTask);
 
             var lookup = lookupTask.Result;
@@ -62,7 +60,7 @@ namespace KenBonny.KeybaseSharp.Tests
         [TestMethod]
         public void Lookup_Test_Multiple_Known_Unknown_Users()
         {
-            var lookupTask = User.LookupAsync(new[] {KnownUser, UnknownUser});
+            var lookupTask = KeybaseApi.User.LookupAsync(new[] { KnownUser, UnknownUser });
             Assert.IsNotNull(lookupTask);
 
             var lookup = lookupTask.Result;
@@ -75,7 +73,7 @@ namespace KenBonny.KeybaseSharp.Tests
         [TestMethod]
         public void Lookup_Test_Single_Unknown_User()
         {
-            var lookup = User.LookupAsync(UnknownUser).Result;
+            var lookup = KeybaseApi.User.LookupAsync(UnknownUser).Result;
 
             Assert.IsNotNull(lookup);
             Assert.AreEqual(205, lookup.Status.Code);
@@ -87,7 +85,7 @@ namespace KenBonny.KeybaseSharp.Tests
         [TestMethod]
         public void Lookup_Test_Single_Unknown_Identity()
         {
-            var lookupTask = User.LookupAsync(UnknownUser, ProofType.Twitter);
+            var lookupTask = KeybaseApi.User.LookupAsync(UnknownUser, ProofType.Twitter);
             Assert.IsNotNull(lookupTask);
 
             var lookup = lookupTask.Result;
@@ -99,7 +97,7 @@ namespace KenBonny.KeybaseSharp.Tests
         public void Autocomplete_Test()
         {
 
-            var autocompleteTask = User.AutocompleteAsync(PartialUser);
+            var autocompleteTask = KeybaseApi.User.AutocompleteAsync(PartialUser);
             Assert.IsNotNull(autocompleteTask);
 
             var autocomplete = autocompleteTask.Result;
@@ -112,7 +110,7 @@ namespace KenBonny.KeybaseSharp.Tests
         [TestMethod]
         public void Key_Test_Known_User()
         {
-            var key = User.Key(KnownUser).Result;
+            var key = KeybaseApi.User.Key(KnownUser).Result;
 
             Assert.IsFalse(string.IsNullOrWhiteSpace(key));
             Assert.IsTrue(key.Contains("BEGIN PGP PUBLIC KEY BLOCK"));
@@ -123,7 +121,7 @@ namespace KenBonny.KeybaseSharp.Tests
         {
             try
             {
-                var key = User.Key(UnknownUser).Result;
+                var key = KeybaseApi.User.Key(UnknownUser).Result;
                 Assert.AreEqual("SELF-SIGNED PUBLIC KEY NOT FOUND", key);
             }
             catch (Exception ex)
@@ -139,7 +137,7 @@ namespace KenBonny.KeybaseSharp.Tests
             {
                 {ProofType.Twitter, new[] {KnwonTwitter}}
             };
-            var discoverTask = User.DiscoverAsync(identities);
+            var discoverTask = KeybaseApi.User.DiscoverAsync(identities);
             Assert.IsNotNull(discoverTask);
 
             var discover = discoverTask.Result;
@@ -154,7 +152,7 @@ namespace KenBonny.KeybaseSharp.Tests
             {
                 {ProofType.Twitter, new[] {UnknownUser}}
             };
-            var discoverTask = User.DiscoverAsync(identities);
+            var discoverTask = KeybaseApi.User.DiscoverAsync(identities);
             Assert.IsNotNull(discoverTask);
 
             var discover = discoverTask.Result;
@@ -169,7 +167,7 @@ namespace KenBonny.KeybaseSharp.Tests
             {
                 {ProofType.Twitter, new[] {KnwonTwitter}}
             };
-            var discoverTask = User.DiscoverUsernamesAsync(identities);
+            var discoverTask = KeybaseApi.User.DiscoverUsernamesAsync(identities);
             Assert.IsNotNull(discoverTask);
 
             var discover = discoverTask.Result;
@@ -183,7 +181,7 @@ namespace KenBonny.KeybaseSharp.Tests
             {
                 {ProofType.Twitter, new[] {UnknownUser}}
             };
-            var discoverTask = User.DiscoverUsernamesAsync(identities);
+            var discoverTask = KeybaseApi.User.DiscoverUsernamesAsync(identities);
             Assert.IsNotNull(discoverTask);
 
             var discover = discoverTask.Result;

@@ -20,6 +20,11 @@ namespace KenBonny.KeybaseSharp
         // ReSharper disable once MemberCanBePrivate.Global
         public static HttpClient HttpClient = new HttpClient();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly User User = new User();
+
         private static readonly Uri BaseLocation = new Uri("https://keybase.io/");
 
         /// <summary>
